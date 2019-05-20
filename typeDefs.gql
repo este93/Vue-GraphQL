@@ -1,0 +1,47 @@
+type User {
+	_id: ID
+	username: String! @unique
+	email: String! 
+	password: String!
+	avatar: String
+	joinDate: String
+	favorites: [Pet]
+}
+
+type Pet {
+	name: String! 
+	description: String
+	race: String!
+	image: String
+	createdDate: String
+	likes: Int
+	createdBy: User!
+	comments: [Comments]
+}
+
+type Comments {
+	_id: ID
+	commentBody: String!
+	commentDate: String
+	commentUser: String!
+}
+
+type Query {
+	getPets: [Pet]
+},
+
+type Mutation {
+	addPet(
+		name: String!,
+		description: String, 
+		race: String!, 
+		image: String, 
+		creatorID: ID!
+	):Pet!
+
+	signupUser(
+		username: String!, 
+		email: String!,
+		password: String!
+	): User!
+}
