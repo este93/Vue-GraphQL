@@ -9,8 +9,14 @@ const PetsSchema = new mongoose.Schema({
 		type: String
 	},
 	race: {
-		type: String,
-		required: true
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+		ref: 'Animal'
+	},
+	createdBy: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+		ref: 'User'
 	},
 	image: {
 		type: String
@@ -25,11 +31,6 @@ const PetsSchema = new mongoose.Schema({
 	},
 	// property === path
 	// ref === model
-	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: true,
-		ref: 'User'
-	},
 	comments: [{
 		commentBody: {
 			type: String,

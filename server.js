@@ -8,6 +8,7 @@ const typeDefs = fs.readFileSync(filePath, 'utf-8');
 const resolvers = require("./resolvers");
 
 require('dotenv').config({path: 'variables.env'});
+const Animal = require('./models/Animal');
 const User = require('./models/User');
 const Pet = require('./models/Pet');
 
@@ -24,6 +25,7 @@ const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	context: {
+		Animal,
 		User,
 		Pet
 	}

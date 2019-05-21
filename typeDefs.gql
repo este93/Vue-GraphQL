@@ -7,18 +7,23 @@ type User {
 	joinDate: String
 	favorites: [Pet]
 }
-
+type Animal {
+	_id: ID
+	name: String! @unique 
+	description: String
+	image: String
+	createdDate: String
+}
 type Pet {
 	name: String! 
 	description: String
-	race: String!
+	race: Animal!
 	image: String
 	createdDate: String
 	likes: Int
 	createdBy: User!
 	comments: [Comments]
 }
-
 type Comments {
 	_id: ID
 	commentBody: String!
@@ -27,21 +32,28 @@ type Comments {
 }
 
 type Query {
-	getPets: [Pet]
+	getPets: [Pet],
+	getAnimals: [Animal]
 },
 
 type Mutation {
-	addPet(
-		name: String!,
-		description: String, 
-		race: String!, 
-		image: String, 
-		creatorID: ID!
-	):Pet!
-
 	signupUser(
 		username: String!, 
 		email: String!,
 		password: String!
-	): User!
+	):User!
+
+	addAnimal(
+		name: String!,
+		description: String, 
+		image: String,		
+	):Animal!
+
+	addPet(
+		name: String!,
+		description: String, 
+		raceID: ID!, 
+		image: String, 
+		creatorID: ID!
+	):Pet!
 }
