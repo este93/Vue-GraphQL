@@ -15,6 +15,7 @@ type Animal {
 	createdDate: String
 }
 type Pet {
+	_id: ID
 	name: String! 
 	description: String
 	race: Animal!
@@ -31,17 +32,26 @@ type Comments {
 	commentUser: String!
 }
 
+type Token {
+	token: String!
+}
+
 type Query {
 	getPets: [Pet],
 	getAnimals: [Animal]
-},
+}
 
 type Mutation {
+	signinUser(
+		username: String!, 
+		password: String!
+	):Token
+	
 	signupUser(
 		username: String!, 
 		email: String!,
 		password: String!
-	):User!
+	):Token
 
 	addAnimal(
 		name: String!,
